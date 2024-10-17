@@ -1,0 +1,9 @@
+#rootNode{
+    -fx-background-color: rgb(255, 250, 240);
+}
+.menuPrincipalButton{
+    -fx-background-color: blue;
+}
+.menuPrincipalButton: hover{
+    -fx-background-color: #87CEEB;
+}
