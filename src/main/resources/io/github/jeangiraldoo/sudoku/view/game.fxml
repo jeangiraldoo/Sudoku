@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jeangiraldoo.sudoku.controller.GameController">
+    <center>
+        <VBox fx:id="board" alignment="CENTER">
+            <HBox fx:id="section1"></HBox>
+            <HBox fx:id="section2"></HBox>
+            <HBox fx:id="section3"></HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox fx:id="buttonContainer" alignment="CENTER">
+            <Button fx:id="ayudaButton" text="Ayuda" onAction="#handleAyudaButton"/>
+            <Button onAction="#handleInformacionButton" styleClass="menuPrincipalButton" text="Information"/>
+        </HBox>
+    </bottom>
+</BorderPane>

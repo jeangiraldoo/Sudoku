@@ -1,13 +1,11 @@
 package io.github.jeangiraldoo.sudoku.view;
 
 import io.github.jeangiraldoo.sudoku.Main;
-import io.github.jeangiraldoo.sudoku.juegoModelo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 
@@ -24,7 +22,7 @@ public class Controller {
     private VBox rootNode;
     private double screenHeight;
     private double screenWidth;
-    private juegoModelo modelo = new juegoModelo();
+    //private modelo modelo = new modelo();
 
     /**
      * Se ejecuta automáticamente luego de cargar el .fxml, inicializa atributos del controlador
@@ -33,8 +31,8 @@ public class Controller {
         Rectangle2D dimensions = Screen.getPrimary().getBounds();
         screenHeight = dimensions.getHeight();
         screenWidth = dimensions.getWidth();
-        modelo.setScreenWidth(screenWidth);
-        modelo.setScreenHeight(screenHeight);
+        //modelo.setScreenWidth(screenWidth);
+        //modelo.setScreenHeight(screenHeight);
     }
 
     /**
@@ -62,7 +60,7 @@ public class Controller {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
-
+                changeView("/io/github/jeangiraldoo/sudoku/view/game.fxml");
             } else if (result.get() == ButtonType.CANCEL) {
 
             }

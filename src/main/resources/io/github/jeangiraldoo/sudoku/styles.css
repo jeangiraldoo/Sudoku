@@ -3,6 +3,7 @@
 }
 .menuPrincipalButton{
     -fx-background-color: blue;
+    -fx-text-fill: white;
 }
 .menuPrincipalButton: hover{
     -fx-background-color: #87CEEB;
