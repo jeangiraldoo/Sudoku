@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  *
- * Controlador que interactúa con view.fxml y el modelo en la pantalla de ingreso de la palabra secreta
+ * Controlador que interactúa con view.fxml y el Modelo en la pantalla de ingreso de la palabra secreta
  *
  */
 public class Controller {
@@ -22,7 +22,7 @@ public class Controller {
     private VBox rootNode;
     private double screenHeight;
     private double screenWidth;
-    //private modelo modelo = new modelo();
+    //private Modelo Modelo = new Modelo();
 
     /**
      * Se ejecuta automáticamente luego de cargar el .fxml, inicializa atributos del controlador
@@ -31,8 +31,8 @@ public class Controller {
         Rectangle2D dimensions = Screen.getPrimary().getBounds();
         screenHeight = dimensions.getHeight();
         screenWidth = dimensions.getWidth();
-        //modelo.setScreenWidth(screenWidth);
-        //modelo.setScreenHeight(screenHeight);
+        //Modelo.setScreenWidth(screenWidth);
+        //Modelo.setScreenHeight(screenHeight);
     }
 
     /**

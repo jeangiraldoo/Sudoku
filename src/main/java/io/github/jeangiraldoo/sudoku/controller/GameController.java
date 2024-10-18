@@ -1,5 +1,7 @@
 package io.github.jeangiraldoo.sudoku.controller;
 
+import io.github.jeangiraldoo.sudoku.Modelo;
+import io.github.jeangiraldoo.sudoku.view.Alert;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.Arrays;
 
 public class GameController {
     @FXML
@@ -21,6 +25,7 @@ public class GameController {
     private Button ayudaButton;
     @FXML
     private HBox buttonContainer;
+    private Modelo model = new Modelo();
 
     public void initialize(){
         buttonContainer.setSpacing(20);
@@ -34,14 +39,39 @@ public class GameController {
         HBox[] sections = {section1, section2, section3};
         for (int section = 0; section < 3; section++) {
             for (int sectionBlock = 0; sectionBlock < 2; sectionBlock++) {
-                HBox upperBlock = new HBox(new TextField(), new TextField(), new TextField());
-                HBox lowerBlock = new HBox(new TextField(), new TextField(), new TextField());
+                HBox upperBlock = new HBox();
+                HBox lowerBlock = new HBox();
+                for (int i = 0; i < 3; i++) {
+                    TextField textBox = getTextField();
+                    upperBlock.getChildren().add(textBox);
+                }
+                for (int i = 0; i < 3; i++) {
+                    TextField textBox = getTextField();
+                    lowerBlock.getChildren().add(textBox);
+                }
                 VBox block = new VBox(upperBlock, lowerBlock);
                 block.setStyle("-fx-border-color: blue;");
                 sections[section].getChildren().add(block);
             }
         }
+        System.out.println(Arrays.toString(model.getNumbers()));
     }
+    private void textFieldToLabel(){
+
+    }
+    private TextField getTextField() {
+        TextField textBox = new TextField();
+        textBox.setOnAction(event ->{
+            boolean value = model.validateInput(textBox.getText());
+            if(!value){
+                Alert wrongInputAlert = new Alert();
+                wrongInputAlert.showAlert("wrongInput", "error", "Entrada inválida", "La entrada ingresa no es valida. Debes ingresar un número entre 1 y 6.");
+                textBox.setText("");
+            }
+        });
+        return textBox;
+    }
+
     public void handleInformacionButton(){
         io.github.jeangiraldoo.sudoku.view.Alert alert = new io.github.jeangiraldoo.sudoku.view.Alert();
         alert.showAlert("information", "Tutorial", "Tutorial de Sudoku 6x6","El juego es sudoku 6x6, es decir, el tablero tiene 6 filas y 6 columnas, y las cuadrículas son de 2x3" +

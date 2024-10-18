@@ -15,9 +15,9 @@ public class Alert implements AlertBoxInterface{
         javafx.scene.control.Alert alert;
         if(type.equals("information")) {
             alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            System.out.println("info");
-        }else{
-            System.out.println("confir");
+        }else if(type.equals("wrongInput")){
+            alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        } else{
             alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
         }
 
