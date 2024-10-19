@@ -117,6 +117,12 @@ public class Modelo {
         }
         return numbers;
     }
+    public boolean validateNumber(int number, int blockPos, int textFieldPos){
+        System.out.println(number);
+        System.out.println(blockPos);
+        System.out.println(textFieldPos);
+        return (int) numbers[blockPos].get(Integer.toString(textFieldPos)) == number;
+    }
     public boolean validateInput(String input){
         int number;
         try{

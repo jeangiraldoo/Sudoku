@@ -67,8 +67,6 @@ public class GameController {
                 block.setStyle("-fx-border-color: blue;");
                 sections[section].getChildren().add(block);
                 textFieldToLabel(section, sectionBlock);
-                System.out.println(upperBlock.getChildren());
-                System.out.println(lowerBlock.getChildren());
             }
         }
     }
@@ -101,12 +99,17 @@ public class GameController {
 
         int pos1= model.chooseRandomNumber(3);
         int pos2 = model.chooseRandomNumber(3);
+        int numbersPos;
+        if(pos2 == 0){
+            numbersPos =3;
+        }else if (pos2 == 1){
+            numbersPos = 4;
+        }else {
+            numbersPos = 5;
+        }
         HashMap[] numbers = model.getNumbers();
-        System.out.println(numbers[blockNumber].get("0"));
         int value1 = (int) numbers[blockNumber].get(Integer.toString(pos1));
-        int value2 = (int) numbers[blockNumber].get(Integer.toString(pos2));
-        System.out.println(value2);
-        System.out.println(value1);
+        int value2 = (int) numbers[blockNumber].get(Integer.toString(numbersPos));
         Label label1 = new Label(Integer.toString(value1));
         label1.setPrefWidth(200);
         label1.setStyle("-fx-border-color: -fx-box-border; -fx-background-color: white;");
@@ -119,6 +122,7 @@ public class GameController {
         label2.setMaxHeight(Double.MAX_VALUE);
         upperHalf.getChildren().set(pos1, label1);
         lowerHalf.getChildren().set(pos2, label2);
+        System.out.println(Arrays.toString(numbers));
     }
 
     private int chooseHalf(){
@@ -132,6 +136,105 @@ public class GameController {
                 Alert wrongInputAlert = new Alert();
                 wrongInputAlert.showAlert("wrongInput", "error", "Entrada inválida", "La entrada ingresa no es valida. Debes ingresar un número entre 1 y 6.");
                 textBox.setText("");
+            }else{
+                int blockNumber;
+                int number = Integer.parseInt(textBox.getText());
+                HBox halfBlock = (HBox) textBox.getParent();
+                System.out.println("halfblock: " + halfBlock.getChildren());
+                VBox block = (VBox) halfBlock.getParent();
+                System.out.println("block: " + block.getChildren());
+                int halfBlockPos = block.getChildren().indexOf(halfBlock);
+                System.out.println("halfblockPos: " + halfBlockPos);
+                int textFieldPos = halfBlock.getChildren().indexOf(textBox);
+                System.out.println("TextfieldPos: " + textFieldPos);
+                HBox section = (HBox) block.getParent();
+                int sectionPos = board.getChildren().indexOf(section);
+                int blockPos = section.getChildren().indexOf(block);
+                int numbersPos = textFieldPos;
+                if(sectionPos == 0){
+                    if(blockPos == 0){
+                        blockNumber = 0;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    } else {
+                        blockNumber = 1;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    }
+                }else if(sectionPos == 1){
+                    if(blockPos == 0){
+                        blockNumber = 2;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    } else {
+                        blockNumber = 3;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    }
+                }else {
+                    if(blockPos == 0){
+                        blockNumber = 4;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    } else{
+                        blockNumber = 5;
+                        if(halfBlockPos == 1){
+                            if(numbersPos == 0){
+                                numbersPos = 3;
+                            } else if (numbersPos == 1) {
+                                numbersPos = 4;
+                            } else if (numbersPos == 2) {
+                                numbersPos = 5;
+                            }
+                        }
+                    }
+                }
+                boolean validatedNumber = model.validateNumber(number, blockNumber, numbersPos);
+                if(validatedNumber){
+                    System.out.println("blockNumber: " + blockNumber);
+                    Label label = new Label(Integer.toString(number));
+                    label.setPrefWidth(200);
+                    label.setMaxHeight(Double.MAX_VALUE);
+                    label.setStyle("-fx-border-color: -fx-box-border; -fx-background-color: white;");
+                    halfBlock.getChildren().set(textFieldPos, label);
+                }else {
+                    textBox.setStyle("-fx-border-color: red;");
+                }
             }
         });
         return textBox;
