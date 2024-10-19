@@ -2,6 +2,7 @@ package io.github.jeangiraldoo.sudoku.controller;
 
 import io.github.jeangiraldoo.sudoku.Modelo;
 import io.github.jeangiraldoo.sudoku.view.Alert;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -15,6 +16,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -31,6 +33,7 @@ public class GameController {
     private Button ayudaButton;
     @FXML
     private HBox buttonContainer;
+    private ObservableList<Node> textFieldsLeft = FXCollections.observableArrayList();;
     private Modelo model = new Modelo();
     private HBox[] sections;
 
@@ -260,15 +263,129 @@ public class GameController {
             buttonContainer.getChildren().add(celebrationMessage);
         }
     }
+    public void getTextFieldsLeft(){
+        ArrayList<Node> hboxList = new ArrayList<>();
+        textFieldsLeft.clear();
+        for (int j = 0; j < 3; j++) {
+            // Retrieve the children of each section, which is an ObservableList<Node>
+            for (Node node : sections[j].getChildren()) {
+                // Check if the node is a VBox before casting
+                if (node instanceof VBox) {
+                    System.out.println("siuuu");
+                    VBox block = (VBox) node;
+                    for (Node child : block.getChildren()) {
+                        hboxList.add(child);
+                    }
+                }
+            }
+        }
+        for (Node node : hboxList) {
+            if (node instanceof HBox) {
+                for (Node tFields : ((HBox) node).getChildren()) {
+                    if(tFields instanceof TextField)
+                        textFieldsLeft.addAll(((TextField) tFields));
+                }
+            }
+        }
+    }
     /**
      * Shows information about the game when the información button is pressed.
      */
     public void handleInformacionButton(){
-        io.github.jeangiraldoo.sudoku.view.Alert alert = new io.github.jeangiraldoo.sudoku.view.Alert();
+        Alert alert = new Alert();
         alert.showAlert("information", "Tutorial", "Tutorial de Sudoku 6x6","El juego es sudoku 6x6, es decir, el tablero tiene 6 filas y 6 columnas, y las cuadrículas son de 2x3" +
                 "El objetivo del juego es llenar la cuadrícula con números del 1 al 6.");
     }
     public void handleAyudaButton(){
-
+        getTextFieldsLeft();
+        int randomPos = model.chooseRandomNumber(textFieldsLeft.size());
+        System.out.println(textFieldsLeft.size());
+        TextField textField = (TextField) textFieldsLeft.get(randomPos);
+        HBox halfBlock = (HBox) textField.getParent();
+        VBox block = (VBox) halfBlock.getParent();
+        int halfBlockPos = block.getChildren().indexOf(halfBlock);
+        int textFieldPos = halfBlock.getChildren().indexOf(textField);
+        HBox section = (HBox) block.getParent();
+        int sectionPos = board.getChildren().indexOf(section);
+        int blockPos = section.getChildren().indexOf(block);
+        int numbersPos = textFieldPos;
+        int blockNumber;
+        if(sectionPos == 0){
+            if(blockPos == 0){
+                blockNumber = 0;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            } else {
+                blockNumber = 1;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            }
+        }else if(sectionPos == 1){
+            if(blockPos == 0){
+                blockNumber = 2;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            } else {
+                blockNumber = 3;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            }
+        }else {
+            if(blockPos == 0){
+                blockNumber = 4;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            } else{
+                blockNumber = 5;
+                if(halfBlockPos == 1){
+                    if(numbersPos == 0){
+                        numbersPos = 3;
+                    } else if (numbersPos == 1) {
+                        numbersPos = 4;
+                    } else if (numbersPos == 2) {
+                        numbersPos = 5;
+                    }
+                }
+            }
+        }
+        int posValue = (Integer) model.getNumbers()[blockNumber].get(String.valueOf(numbersPos));
+        textField.setText(String.valueOf(posValue));
+        textField.setStyle("-fx-background-color: #87CEEB;");
+        textFieldsLeft.remove(randomPos);
     }
 }
