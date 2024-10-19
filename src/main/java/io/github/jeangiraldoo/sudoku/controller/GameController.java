@@ -71,6 +71,11 @@ public class GameController {
         }
     }
     private void textFieldToLabel(int sectionNumber, int sectionBlock){
+        /**
+         * Replaces 2 textFields in a block with 2 labels, each one containing the value associated with the
+         * numbers array in the Modelo class, serving as starter hints for the user.
+         * 
+         */
         int blockNumber;
         if (sectionNumber == 0){
             if(sectionBlock == 0){
@@ -124,10 +129,11 @@ public class GameController {
         lowerHalf.getChildren().set(pos2, label2);
         System.out.println(Arrays.toString(numbers));
     }
-
-    private int chooseHalf(){
-        return model.chooseRandomNumber(2);
-    }
+    /**
+     * This function is executed when the user types something in a textField and then presses the
+     * enter key. It will validate if the input is valid, and if it is, it will modify the graphical board
+     * accordingly.
+     */
     private TextField getTextField() {
         TextField textBox = new TextField();
         textBox.setOnAction(event ->{
@@ -241,7 +247,10 @@ public class GameController {
         });
         return textBox;
     }
-
+    /**
+     * Checks if there's no more textFields in the board, in which case it will replace the
+     * buttonContainer with a congratulations message.
+     */
     public void checkVictory(){
         if(model.getTotalLabels() >= 36){
             buttonContainer.getChildren().clear();
@@ -251,7 +260,9 @@ public class GameController {
             buttonContainer.getChildren().add(celebrationMessage);
         }
     }
-
+    /**
+     * Shows information about the game when the información button is pressed.
+     */
     public void handleInformacionButton(){
         io.github.jeangiraldoo.sudoku.view.Alert alert = new io.github.jeangiraldoo.sudoku.view.Alert();
         alert.showAlert("information", "Tutorial", "Tutorial de Sudoku 6x6","El juego es sudoku 6x6, es decir, el tablero tiene 6 filas y 6 columnas, y las cuadrículas son de 2x3" +

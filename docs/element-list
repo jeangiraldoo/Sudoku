@@ -1,0 +1,4 @@
+module:io.github.jeangiraldoo.soleclipsado
+io.github.jeangiraldoo.sudoku
+io.github.jeangiraldoo.sudoku.controller
+io.github.jeangiraldoo.sudoku.view

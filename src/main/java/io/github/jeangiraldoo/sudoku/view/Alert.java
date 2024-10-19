@@ -6,9 +6,9 @@ package io.github.jeangiraldoo.sudoku.view;
 public class Alert implements AlertBoxInterface{
     /**
      * Muestra una alerta informativa
-     * @param title Titulo de la ventana
-     * @param header Cabecera del mensaje
-     * @param message Cuerpo del mensaje
+     * @param title Window title
+     * @param header Header of the message
+     * @param message Body of the message
      */
     @Override
     public void showAlert(String type, String title, String header, String message) {
