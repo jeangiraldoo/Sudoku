@@ -232,12 +232,24 @@ public class GameController {
                     label.setMaxHeight(Double.MAX_VALUE);
                     label.setStyle("-fx-border-color: -fx-box-border; -fx-background-color: white;");
                     halfBlock.getChildren().set(textFieldPos, label);
+                    model.increaseTotalLabels();
+                    checkVictory();
                 }else {
                     textBox.setStyle("-fx-border-color: red;");
                 }
             }
         });
         return textBox;
+    }
+
+    public void checkVictory(){
+        if(model.getTotalLabels() >= 36){
+            buttonContainer.getChildren().clear();
+            Label celebrationMessage = new Label("Felicitaciones! Ganaste!");
+            celebrationMessage.setFont(new Font(25));
+            celebrationMessage.setStyle("-fx-text-fill: green;");
+            buttonContainer.getChildren().add(celebrationMessage);
+        }
     }
 
     public void handleInformacionButton(){

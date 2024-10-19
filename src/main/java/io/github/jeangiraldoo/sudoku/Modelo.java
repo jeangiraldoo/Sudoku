@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Modelo {
     private final HashMap[] numbers;
-
+    private int totalLabels;
     public HashMap[] generateNumbers(){
         HashMap[] numbers = generateBaseStructure();
         for (int block = 0; block < 6; block++) {
@@ -141,7 +141,14 @@ public class Modelo {
     public HashMap[] getNumbers(){
         return numbers;
     }
+    public int getTotalLabels(){
+        return this.totalLabels;
+    }
+    public void increaseTotalLabels(){
+        this.totalLabels++;
+    }
     public Modelo(){
         this.numbers = generateNumbers();
+        this.totalLabels = 12;
     }
 }
