@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  *
- * Controlador que interactúa con view.fxml y el modelo en la pantalla de ingreso de la palabra secreta
+ * Controlador que interactúa con view.fxml y el Modelo en la pantalla de ingreso de la palabra secreta
  *
  */
 public class Controller {
@@ -22,7 +22,7 @@ public class Controller {
     private VBox rootNode;
     private double screenHeight;
     private double screenWidth;
-    //private modelo modelo = new modelo();
+    //private Modelo Modelo = new Modelo();
 
     /**
      * Se ejecuta automáticamente luego de cargar el .fxml, inicializa atributos del controlador
@@ -31,12 +31,12 @@ public class Controller {
         Rectangle2D dimensions = Screen.getPrimary().getBounds();
         screenHeight = dimensions.getHeight();
         screenWidth = dimensions.getWidth();
-        //modelo.setScreenWidth(screenWidth);
-        //modelo.setScreenHeight(screenHeight);
+        //Modelo.setScreenWidth(screenWidth);
+        //Modelo.setScreenHeight(screenHeight);
     }
 
     /**
-     * Carga el archivo fxml que se le pasa
+     * Loads a given FXML file
      * @param fxmlFile URL del archio fxml
      * @throws IOException en caso de que el archivo fxml no se encuentre en la URL especificada
      */
@@ -48,8 +48,7 @@ public class Controller {
     }
 
     /**
-     * Event handler para el botón de jugar
-     * @throws IOException En caso de que el método changeView lance una excepción
+     * Handles the JugarButton event. Calls changeView in order to load the game view.
      */
     public void handleJugarButton() throws IOException {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
@@ -72,6 +71,9 @@ public class Controller {
      * Event handler del botón de información, crea una instancia de la clase Alert, la cual implementa la interfaz AlertBox y la inicizaliza con valores
      */
     public void handleInformacionButton(){
+        /**
+         * Shows information about the game when the información button is pressed.
+         */
         io.github.jeangiraldoo.sudoku.view.Alert alert = new io.github.jeangiraldoo.sudoku.view.Alert();
         alert.showAlert("information", "Tutorial", "Tutorial de Sudoku 6x6","El juego es sudoku 6x6, es decir, el tablero tiene 6 filas y 6 columnas, y las cuadrículas son de 2x3" +
                 "El objetivo del juego es llenar la cuadrícula con números del 1 al 6.");

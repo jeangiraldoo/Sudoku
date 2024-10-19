@@ -5,6 +5,14 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jeangiraldoo.sudoku.controller.GameController">
+    <top>
+        <AnchorPane>
+            <VBox alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <Label text="Sudoku" style="-fx-text-fill: #87CEEB; -fx-font-size: 50px"/>
+                <Label text="¿Podrás resolver este puzzle? Ya lo veremos..."/>
+            </VBox>
+        </AnchorPane>
+    </top>
     <center>
         <VBox fx:id="board" alignment="CENTER">
             <HBox fx:id="section1"></HBox>
@@ -15,7 +23,7 @@
     <bottom>
         <HBox fx:id="buttonContainer" alignment="CENTER">
             <Button fx:id="ayudaButton" text="Ayuda" onAction="#handleAyudaButton"/>
-            <Button onAction="#handleInformacionButton" styleClass="menuPrincipalButton" text="Information"/>
+            <Button onAction="#handleInformacionButton" styleClass="menuPrincipalButton" text="Información"/>
         </HBox>
     </bottom>
 </BorderPane>
